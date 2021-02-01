@@ -28,7 +28,7 @@ func init() {
 	connect(dialect)
 }
 
-// DB() returns postgres instance
+// returns postgres instance
 func DB() *gorm.DB {
 	return db
 }
