@@ -9,7 +9,6 @@ type LogConfig struct {
 }
 
 type serverConfig struct {
-	Host string `required:"true" envconfig:"SERVER_HOST"`
 	Port string `required:"true" envconfig:"SERVER_PORT"`
 }
 
@@ -23,6 +22,7 @@ func init() {
 	Server = new(serverConfig)
 
 	//func MustProcess panics if an error occurs. e.g., no such environment variable
-	envconfig.MustProcess("", Log) //for readability, prefixes are not used
+	//for readability, prefixes are not used
+	envconfig.MustProcess("", Log)
 	envconfig.MustProcess("", Server)
 }
