@@ -2,7 +2,8 @@ package middleware
 
 import (
 	"errors"
-	"fmt"
+
+	"github.com/robin019/url-detection/src/utils/logger"
 
 	"github.com/robin019/url-detection/src/apihelpers"
 
@@ -14,7 +15,7 @@ import (
 func Recover(ctx *fiber.Ctx) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println(fmt.Sprintf("%v", r))
+			logger.ApiLog().Error(r)
 			err = apihelpers.Failed(ctx, &apihelpers.ApiError{
 				Code:  fiber.StatusInternalServerError,
 				Error: errors.New("Internal Server Error"),

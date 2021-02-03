@@ -13,11 +13,11 @@ type serverConfig struct {
 }
 
 type databaseConfig struct {
-	User     string `required:"true" envconfig:"DB_USER"`
-	Password string `required:"true" envconfig:"DB_PASSWORD"`
-	Host     string `required:"true" envconfig:"DB_HOST"`
-	Port     string `required:"true" envconfig:"DB_PORT"`
-	DBNAME   string `required:"true" envconfig:"DB_DBNAME"`
+	User     string `required:"true" envconfig:"DATABASE_USER"`
+	Password string `required:"true" envconfig:"DATABASE_PASSWORD"`
+	Host     string `required:"true" envconfig:"DATABASE_HOST"`
+	Port     string `required:"true" envconfig:"DATABASE_PORT"`
+	DBNAME   string `required:"true" envconfig:"DATABASE_NAME"`
 }
 
 var (

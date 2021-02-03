@@ -13,7 +13,7 @@ func UrlCheck(params interface{}) (result []map[string]interface{}, err *apihelp
 	value := reflect.ValueOf(params).Elem()
 	url := value.FieldByName("Url").String()
 
-	// crop the last character if it is a slash
+	// crop the last character if it is a '/'
 	if url[len(url)-1] == '/' {
 		url = url[:len(url)-1]
 	}
@@ -28,7 +28,7 @@ func UrlCheck(params interface{}) (result []map[string]interface{}, err *apihelp
 	db := sql.DB()
 	db.Raw(`select md.source, md.source_id, md.verification_time
 			from malicious_url AS mu JOIN malicious_url_detail AS md on mu.id = md.url_id
-			where mu.url = ?`, url).Scan(&queryResults)
+			where md5(lower(mu.url)) = md5(lower(?))`, url).Scan(&queryResults)
 
 	for _, source := range queryResults {
 		result = append(result, map[string]interface{}{
