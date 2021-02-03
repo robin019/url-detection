@@ -5,7 +5,6 @@
 ## Table of contents
 * [Technologies](#technologies)
 * [Features](#features)
-* [TODO](#todo)
 
 ## Technologies
 * Golang 1.15.7 linux/amd64
@@ -13,7 +12,3 @@
 
 ## Features
 * URL Full Match Detection
-
-## TODO
-* Wow improvement to be done 1
-
