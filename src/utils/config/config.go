@@ -5,7 +5,8 @@ import (
 )
 
 type logConfig struct {
-	File string `required:"true" envconfig:"LOG_FILE"`
+	ApiLogFile     string `required:"true" envconfig:"LOG_API_FILE"`
+	RequestLogFile string `required:"true" envconfig:"LOG_REQUEST_FILE"`
 }
 
 type serverConfig struct {
