@@ -3,19 +3,21 @@ package router
 import (
 	"log"
 
+	"github.com/gofiber/fiber/v2/middleware/cors"
+
 	"github.com/robin019/url-detection/src/utils/config"
 
 	"github.com/robin019/url-detection/src/middleware"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/robin019/url-detection/src/handler"
 )
 
 func Route() {
 	app := fiber.New()
-	app.Use(middleware.Recover) //recover from a panic thrown by any handler
-	app.Use(cors.New())         //enable CORS (if web browser support is needed)
+	app.Use(middleware.Recover)      //recover from a panic thrown by any handler
+	app.Use(middleware.RequestLog()) //logger middleware for Fiber that logs HTTP request/response details.
+	app.Use(cors.New())              //enable CORS (if web browser support is needed)
 
 	api := app.Group("/api")
 
