@@ -18,18 +18,18 @@ var (
 )
 
 func init() {
-	initLogger()
+	//get current directory
+	_, file, _, _ := runtime.Caller(0)
+	currentPath := filepath.Dir(file)
+
+	initApiLog(currentPath)
 }
 
 func ApiLog() *zap.SugaredLogger {
 	return apiLog
 }
 
-func initLogger() {
-	//get current directory
-	_, file, _, _ := runtime.Caller(0)
-	currentPath := filepath.Dir(file)
-
+func initApiLog(currentPath string) {
 	//create .log file if not exists
 	logPath := fmt.Sprintf(`%s/../../../log/%s`, currentPath, config.Log.File)
 	err := touchFile(logPath)
@@ -38,8 +38,7 @@ func initLogger() {
 	}
 
 	logBuilder := zap.NewDevelopmentConfig()
-	logBuilder.EncoderConfig.EncodeTime = SyslogTimeEncoder
-	//logBuilder.EncoderConfig.EncodeLevel = CustomLevelEncoder
+	logBuilder.EncoderConfig.EncodeTime = syslogTimeEncoder
 	logBuilder.OutputPaths = []string{
 		logPath,
 	}
@@ -51,7 +50,7 @@ func initLogger() {
 	apiLog = logger.Sugar()
 }
 
-func SyslogTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
+func syslogTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(t.Format("2006-01-02 15:04:05"))
 }
 
