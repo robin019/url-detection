@@ -18,7 +18,7 @@ func Recover(ctx *fiber.Ctx) (err error) {
 			logger.ApiLog().Error(r)
 			err = apihelpers.Failed(ctx, &apihelpers.ApiError{
 				Code:  fiber.StatusInternalServerError,
-				Error: errors.New("Internal Server Error"),
+				Error: errors.New("internal server error"),
 			})
 		}
 	}()
