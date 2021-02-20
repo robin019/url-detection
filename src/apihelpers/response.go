@@ -3,9 +3,9 @@ package apihelpers
 import "github.com/gofiber/fiber/v2"
 
 func Success(ctx *fiber.Ctx, data interface{}) error {
-	ctx.Status(200)
+	ctx.Status(fiber.StatusOK)
 	return ctx.JSON(&fiber.Map{
-		"code":    200,
+		"code":    fiber.StatusOK,
 		"message": "success",
 		"data":    data,
 	})

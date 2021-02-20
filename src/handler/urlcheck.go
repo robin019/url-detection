@@ -18,7 +18,7 @@ func UrlCheck(ctx *fiber.Ctx) error {
 	// url.QueryUnescape() returns an error if any % is not followed by two hexadecimal digits.
 	if err != nil {
 		return apihelpers.Failed(ctx, &apihelpers.ApiError{
-			Code:  400,
+			Code:  fiber.StatusBadRequest,
 			Error: err,
 		})
 	}
